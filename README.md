@@ -32,6 +32,9 @@ Then run
 ```
 python dollyzoom.py'
 ```
+## Video
+Explaination and examples are presented in our video:
+https://www.youtube.com/watch?v=hi2zVYyleOI&t=13s
 
 ## Acknowledgement
 We borrowed some parts of the the following papers and their implementation for our project
