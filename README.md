@@ -72,8 +72,7 @@ https://github.com/sepideh-srj/dollyzoom/assets/12370175/3911cb23-c4f8-43ab-954d
 
 ## Acknowledgement
 We borrowed some parts of the following papers and their implementation for our project
-
-### Midas
+### Boosting Monocular Depth Estimation
 https://github.com/compphoto/BoostingMonocularDepth
 ```
 @INPROCEEDINGS{Miangoleh2021Boosting,
@@ -83,6 +82,8 @@ journal={Proc. CVPR},
 year={2021},
 }
 ```
+### Midas
+
 https://github.com/intel-isl/MiDaS
 ```
 @article{Ranftl2020,
