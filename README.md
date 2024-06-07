@@ -1,8 +1,21 @@
 # Dolly Zoom
 
-We aim to create a dolly zoom effect on a single shot without any depth information. To achieve this, we use the depth estimation method from "Boosting Monocular Depth Estimation Models to High-Resolution via Content-Adaptive Multi-Resolution Merging," which provides a disparity estimation. However, this estimation is not always accurate for the relative distance between objects.
+## Introduction
+We aim to create a dolly zoom effect on a single shot without any depth information.
 
-To segment the object from the rest of the image, we utilize the "MODNet: Is a Green Screen Really Necessary for Real-Time Portrait Matting" for matting objective decomposition. Using the matting estimation, we create a threshold to segment the background from the foreground. We then average the depth map for the foreground while smoothing the depth map for the background, resulting in the final effect.
+In Dolly Zoom, the foreground stays the same while the background moves, so we need to have depth and matting information for the shot.
+
+We used 3D ken burn effect as our baseline. We upgraded the depth estimation block to "Boosting Monocular Depth Estimation Models to High-Resolution via Content-Adaptive Multi-Resolution Merging". 
+
+Here is our pipeline:
+
+Given a sequence of video frames, we generate depth and trimap estimations, we then fuse the trimap and depth map and generate a refined depth map. 
+We give in our refined depth map and our input source frames to our view synthesis network to generate the final result.
+
+![841F9BD9-4A6D-4F81-BE3D-34A69F848A15](https://github.com/sepideh-srj/dollyzoom/assets/12370175/2776e22f-a63d-407a-a3ab-abb0ac628ce9)
+![B40AAB41-AF2A-4827-A6C6-127B4B6E532A](https://github.com/sepideh-srj/dollyzoom/assets/12370175/0cf3658e-e7cc-4fee-be81-67e99340eb44)
+
+
 ## setup
 Tested with Python 3.6 and Pytorch 1.6. 
 
@@ -21,7 +34,7 @@ Download depthmerge model weights from https://github.com/ouranonymouscvpr/cvpr2
 depthmerge/checkpoints/scaled_04_1024/latest_net_G.pth
 ```
 
-## usage
+## Usage
 To run it on a video and generate the Vertigo effect (Dolly Zoom) fully automatically, use the following command.
 
 first edit the following three lines of dollyzoom.py
@@ -34,14 +47,42 @@ Then run
 ```
 python dollyzoom.py'
 ```
-## Video
-Explaination and examples are presented in our video:
-https://www.youtube.com/watch?v=hi2zVYyleOI&t=13s
+## Results
+The original video is on the left, and the final result with the dolly zoom effect is on the right.
+
+
+
+https://github.com/sepideh-srj/dollyzoom/assets/12370175/3b29b5e8-01cb-4d3b-ad7c-c1dac7911953
+
+
+https://github.com/sepideh-srj/dollyzoom/assets/12370175/a167e7a7-b355-45c3-9c9c-025ee274d5cc
+
+
+
+
+
+
+
+
+
+https://github.com/sepideh-srj/dollyzoom/assets/12370175/3911cb23-c4f8-43ab-954d-b6f0311f4920
+
+
+
 
 ## Acknowledgement
-We borrowed some parts of the the following papers and their implementation for our project
+We borrowed some parts of the following papers and their implementation for our project
 
 ### Midas
+https://github.com/compphoto/BoostingMonocularDepth
+```
+@INPROCEEDINGS{Miangoleh2021Boosting,
+author={S. Mahdi H. Miangoleh and Sebastian Dille and Long Mai and Sylvain Paris and Ya\u{g}{\i}z Aksoy},
+title={Boosting Monocular Depth Estimation Models to High-Resolution via Content-Adaptive Multi-Resolution Merging},
+journal={Proc. CVPR},
+year={2021},
+}
+```
 https://github.com/intel-isl/MiDaS
 ```
 @article{Ranftl2020,
