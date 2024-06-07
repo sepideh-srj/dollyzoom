@@ -1,6 +1,8 @@
 # Dolly Zoom
 
+We aim to create a dolly zoom effect on a single shot without any depth information. To achieve this, we use the depth estimation method from "Boosting Monocular Depth Estimation Models to High-Resolution via Content-Adaptive Multi-Resolution Merging," which provides a disparity estimation. However, this estimation is not always accurate for the relative distance between objects.
 
+To segment the object from the rest of the image, we utilize the "MODNet: Is a Green Screen Really Necessary for Real-Time Portrait Matting" for matting objective decomposition. Using the matting estimation, we create a threshold to segment the background from the foreground. We then average the depth map for the foreground while smoothing the depth map for the background, resulting in the final effect.
 ## setup
 Tested with Python 3.6 and Pytorch 1.6. 
 
